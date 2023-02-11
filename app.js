@@ -16,7 +16,7 @@ fastify.get("/switch-on", function (request, reply) {
   reply.send(on);
   console.log(state);
 });
-
+console.log(state);
 fastify.get("/switch-off", function (request, reply) {
   state.switch = "off";
   const off = state.switch;
