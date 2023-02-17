@@ -1,0 +1,5 @@
+-- CreateTable
+CREATE TABLE "State" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "status" INTEGER NOT NULL
+);

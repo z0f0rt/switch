@@ -1,3 +1,6 @@
+import { prisma } from "./database/db";
+
+
 const fastify = require("fastify")({
   logger: true,
 });
@@ -5,7 +8,10 @@ const state = {
   switch: "off",
 };
 
+const switchState = await prisma.state.update()
+
 fastify.get("/", function (request, reply) {
+  
   reply.send("Hello. Switch me!");
   console.log("Hello. Switch me!");
 });
