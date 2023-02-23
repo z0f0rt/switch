@@ -11,6 +11,6 @@ datasource db {
 }
 
 model State {
-  id     Int @id @default(autoincrement())
-  status Int
+  id     Int    @id @default(autoincrement())
+  status String
 }
