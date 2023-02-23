@@ -6,7 +6,7 @@ module.exports = async function initState() {
     select: { status: true },
   });
   if (switcherState == null) {
-    await prisma.state.create({ data: { status: "Off" } });
+    await prisma.state.create({ data: { id: 1, status: "Off" } });
     return "Off";
   }
 };
