@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This project was bootstrapped with Fastify-CLI.",
   "main": "src/app.js",
-  "type": "module",
   "directories": {
     "test": "test"
   },
@@ -11,7 +10,9 @@
     "start-watch": "nodemon",
     "test": "tap \"test/**/*.test.js\"",
     "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "dev": "fastify start -w -l info -P app.js",
+    "prisma-migrate": "prisma migrate dev",
+    "migrate:create": "prisma migrate dev --create-only"
   },
   "repository": {
     "type": "git",
