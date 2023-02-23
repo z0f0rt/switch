@@ -1,15 +1,16 @@
-import { prisma } from "../database/db";
-export async function switchState(futureState) {
-  if (futureState === "on") {
+const prisma = require("../database/db");
+
+module.exports = async function switchState(futureState) {
+  if (futureState === "On") {
     await prisma.state.update({
       where: { id: 1 },
-      data: { state: "on" },
+      data: { status: "On" },
     });
   }
-  if (futureState === "off") {
+  if (futureState === "Off") {
     await prisma.state.update({
       where: { id: 1 },
-      data: { state: "on" },
+      data: { status: "Off" },
     });
   }
-}
+};

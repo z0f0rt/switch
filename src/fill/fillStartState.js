@@ -1,11 +1,12 @@
-import { prisma } from "../database/db";
+const prisma = require("../database/db");
 
-export async function fillStartState() {
+module.exports = async function initState() {
   let switcherState = await prisma.state.findUnique({
     where: { id: 1 },
-    select: { state: true },
+    select: { status: true },
   });
   if (switcherState == null) {
-    await prisma.state.create({ data: { state: "Off" } });
+    await prisma.state.create({ data: { status: "Off" } });
+    return "Off";
   }
-}
+};
