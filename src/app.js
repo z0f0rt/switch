@@ -1,40 +1,37 @@
-import { prisma } from "./database/db";
-
+import { prisma } from "./database/db.js";
+import { fillStartState } from "./fill/fillStartState";
+import { switchState } from "./switcher/switchState";
+import { getState } from "./state/getState";
 
 const fastify = require("fastify")({
   logger: true,
 });
-const state = {
-  switch: "off",
-};
-
-const switchState = await prisma.state.update()
 
 fastify.get("/", function (request, reply) {
-  
-  reply.send("Hello. Switch me!");
-  console.log("Hello. Switch me!");
+  reply.send("Попереключаем?м?");
 });
 
 fastify.get("/switch-on", function (request, reply) {
-  state.switch = "on";
-  const on = state.switch;
-  reply.send(on);
-  console.log(state);
+  let state = "on";
+  switchState(state);
+  reply.send("Включен!");
 });
-console.log(state);
+
 fastify.get("/switch-off", function (request, reply) {
-  state.switch = "off";
-  const off = state.switch;
-  reply.send(off);
-  console.log(state);
+  let state = "off";
+  switchState(state);
+  reply.send("Выключен!");
 });
 
 fastify.get("/status", function (request, reply) {
-  const status = state.switch;
-  reply.send(status);
-  console.log(state);
+  let result = getState();
+  if (result == "on") {
+    reply.send("Включен!");
+  }
+  reply.send("Выключен");
 });
+
+fillStartState(prisma);
 
 fastify.listen({ port: 3000 }, function (err, address) {
   if (err) {
